@@ -1,0 +1,27 @@
+<!-- 스타일시트와 같은 스태틱파일을 사용하기 위해서는 템플릿 가장 상단에 {% load static %} 태그를 삽입해야 한다.  -->
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+<h1>{{ question.subject }}</h1>
+
+<div>
+    {{ question.content }}
+</div>
+
+<!-- ---------------------------------------- [edit] ---------------------------------------- -->
+<h5>{{ question.answer_set.count }}개의 답변이 있습니다.</h5>
+<div>
+    <ul>
+        {% for answer in question.answer_set.all %}
+        <li>{{ answer.content }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<form action="{% url 'pybo:answer_create' question.id %}" method="post">
+    <!-- form태그 바로 밑에 보이는 {% csrf_token %}은 보안에 관련된 항목으로 form으로 전송된 데이터가 실제 웹페이지에서 작성된 데이터인지를 판단해 주는 가늠자 역할을 한다. 기타 다른 해킹 툴등에 의해서 데이터가 전송될 경우에는 서버에서 발행한 csrf_token값과 해당 툴에서 보낸 csrf_token 값이 일치하지 않기때문에 오류가 발생한다.-->
+    {% csrf_token %}
+    <textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="답변등록">
+</form>
