@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     # APP 을 추가하고, migrate 를 수행해야한다. migrate 를 수행하기전에 모델이 변경되었기 때문에, "makemigrations" 명령을 먼저 수행한다.
     # "makemigrations" 명령을 수행하면 pybo\migrations\0001_initial.py 라는 파이썬 파일이 자동으로 생성된다.
     # ※ makemigrations을 수행하더라도 실제로 테이블이 생성되지는 않는다. 테이블을 실제 생성하는 명령어는 migrate명령을 통해서만 가능하다.
+    'common.apps.CommonConfig',
     'pybo.apps.PyboConfig',
     'django.contrib.admin',
     'django.contrib.auth',
